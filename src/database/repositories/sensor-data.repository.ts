@@ -22,8 +22,13 @@ export class SensorDataRepository {
     return this.sensorDataModel.findById(id).exec();
   }
 
-  async update(id: string, sensorData: Partial<SensorData>): Promise<SensorData | null> {
-    return this.sensorDataModel.findByIdAndUpdate(id, sensorData, { new: true }).exec();
+  async update(
+    id: string,
+    sensorData: Partial<SensorData>,
+  ): Promise<SensorData | null> {
+    return this.sensorDataModel
+      .findByIdAndUpdate(id, sensorData, { new: true })
+      .exec();
   }
 
   async delete(id: string): Promise<SensorData | null> {

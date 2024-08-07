@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ApiModule } from '../api/api.module';
 import { DatabaseModule } from '../database/database.module';
+import { SensorDataService } from './services/sensor-data.service';
 
 @Module({
-  imports: [
-    ApiModule,
-    DatabaseModule,
-  ]
+  imports: [DatabaseModule],
+  providers: [SensorDataService],
+  exports: [SensorDataService],
 })
 export class ApplicationModule {}

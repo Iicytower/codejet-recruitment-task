@@ -5,8 +5,13 @@ import { SensorDataRepository } from './repositories/sensor-data.repository';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.DATABASE_URL ?? 'mongodb://mongodb:27017/sensordata?authSource=admin'),
-    MongooseModule.forFeature([{ name: 'SensorData', schema: SensorDataSchema }]),
+    MongooseModule.forRoot(
+      process.env.DATABASE_URL ??
+        'mongodb://mongodb:27017/sensordata?authSource=admin',
+    ),
+    MongooseModule.forFeature([
+      { name: 'SensorData', schema: SensorDataSchema },
+    ]),
   ],
   providers: [SensorDataRepository],
   exports: [SensorDataRepository],
