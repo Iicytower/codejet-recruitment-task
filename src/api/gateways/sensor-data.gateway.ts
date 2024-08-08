@@ -5,17 +5,21 @@ import {
   WsResponse,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  ConnectedSocket,
 } from '@nestjs/websockets';
-import { Logger } from '@nestjs/common';
+import { Logger, UseFilters, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Socket } from 'socket.io';
 import { SensorDataDto } from '../dto/sensor-data.dto';
 import { SensorDataService } from '../../application';
+import { AllExceptionsFilter } from '../common/all-exceptions.filter';
 
+@UseFilters(AllExceptionsFilter)
 @WebSocketGateway({
   cors: {
     origin: '*',
   },
 })
+@UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
 export class SensorDataGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {
@@ -37,8 +41,8 @@ export class SensorDataGateway
   @SubscribeMessage('sensorData')
   async handleSensorData(
     @MessageBody() body: SensorDataDto,
+    @ConnectedSocket() client: Socket,
   ): Promise<WsResponse<string>> {
-
     await this.service.storeSensorData(body);
 
     return { event: 'sensorDataResponse', data: 'Data received successfully' };
