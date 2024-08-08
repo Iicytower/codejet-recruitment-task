@@ -67,13 +67,18 @@ src/
 - [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 
 ### Installation
-1. Clone the repository:
+1. Clone the repository:<br>
+   HTTP: 
    ```
    git clone https://github.com/your-username/sensor-data-processing.git -b develop
    ```
+   SSH:
+   ```
+   git clone git@github.com:Iicytower/codejet-recruitment-task.git -b develop
+   ```
 2. Navigate to the project directory:
    ```
-   cd sensor-data-processing
+   cd codejet-recruitment-task
    ```
 3. Install the dependencies:
    ```
@@ -91,7 +96,7 @@ src/
    ```
    This will start the NestJS application and the MongoDB database in separate containers.
 
-2. The application will be accessible at `http://localhost:3000`.
+2. The application will be accessible at `localhost:3000`.
 
 ### Running the Tests
 To run the unit tests, use the following command:
